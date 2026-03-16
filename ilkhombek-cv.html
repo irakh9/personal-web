@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ilkhombek Rakhmatullaev</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #f9f8f5; --bg-card: #ffffff; --text: #1a1a1a; --text-muted: #666;
+    --text-light: #999; --border: #e5e2da; --tag-bg: #f0ede6; --tag-text: #444; --line: #ddd9d0;
+  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; font-size: 15px; -webkit-font-smoothing: antialiased; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(249,248,245,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border); padding: 0 2rem; height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo { font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.04em; color: var(--text); text-decoration: none; }
+  .nav-right { display: flex; align-items: center; gap: 2rem; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 13px; color: var(--text-muted); text-decoration: none; letter-spacing: 0.02em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+
+  .lang-switcher { display: flex; gap: 3px; align-items: center; }
+  .lang-btn {
+    font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.06em;
+    padding: 4px 9px; border: 1px solid var(--border); background: transparent;
+    color: var(--text-light); cursor: pointer; border-radius: 3px;
+    transition: all 0.15s; text-transform: uppercase;
+  }
+  .lang-btn:hover { color: var(--text); border-color: var(--text-muted); }
+  .lang-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+  .container { max-width: 760px; margin: 0 auto; padding: 0 2rem; }
+
+  .hero { padding: 120px 0 80px; border-bottom: 1px solid var(--border); }
+  .hero-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-light); margin-bottom: 1.5rem; }
+  .hero h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 300; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1.5rem; color: var(--text); }
+  .hero h1 em { font-style: normal; font-weight: 500; }
+  .hero-desc { font-size: 15px; color: var(--text-muted); max-width: 560px; line-height: 1.75; margin-bottom: 2.5rem; }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; }
+  .hero-meta a, .hero-meta span { font-size: 13px; color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; }
+  .hero-meta a:hover { color: var(--text); }
+  .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--line); display: inline-block; }
+
+  section { padding: 64px 0; border-bottom: 1px solid var(--border); }
+  section:last-child { border-bottom: none; }
+  .section-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2.5rem; }
+  .section-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-light); white-space: nowrap; }
+  .section-line { flex: 1; height: 1px; background: var(--line); }
+
+  .exp-item { margin-bottom: 3rem; }
+  .exp-item:last-child { margin-bottom: 0; }
+  .exp-header { display: grid; grid-template-columns: 1fr auto; gap: 1rem; margin-bottom: 0.35rem; align-items: start; }
+  .exp-role { font-size: 15px; font-weight: 500; color: var(--text); }
+  .exp-period { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-light); letter-spacing: 0.04em; white-space: nowrap; margin-top: 2px; }
+  .exp-company { font-size: 13px; color: var(--text-muted); margin-bottom: 0.9rem; }
+  .exp-company .badge { display: inline-block; background: var(--tag-bg); color: var(--tag-text); font-size: 11px; padding: 2px 8px; border-radius: 3px; margin-left: 0.5rem; font-family: 'DM Mono', monospace; letter-spacing: 0.04em; }
+  .exp-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .exp-list li { font-size: 14px; color: var(--text-muted); padding-left: 1.2rem; position: relative; line-height: 1.65; }
+  .exp-list li::before { content: '—'; position: absolute; left: 0; color: var(--line); font-size: 12px; top: 2px; }
+
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .skill-cell { background: var(--bg-card); padding: 1.2rem 1.4rem; }
+  .skill-category { font-family: 'DM Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 0.6rem; }
+  .skill-items { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+  .gib-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+  .skill-cell--gib { border-left: 2px solid #1a1a1a; }
+  .skill-cell--gib .skill-category { color: var(--text); font-weight: 500; }
+  .skill-cell--gib .skill-items { font-size: 12.5px; line-height: 1.6; }
+
+  .cert-list { display: flex; flex-direction: column; }
+  .cert-item { display: flex; align-items: baseline; justify-content: space-between; padding: 0.85rem 0; border-bottom: 1px solid var(--border); gap: 1rem; }
+  .cert-item:first-child { border-top: 1px solid var(--border); }
+  .cert-name { font-size: 14px; color: var(--text); }
+  .cert-issuer { font-size: 13px; color: var(--text-muted); margin-top: 1px; }
+  .cert-date { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-light); letter-spacing: 0.04em; white-space: nowrap; }
+
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .about-group h3 { font-size: 11px; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 1rem; }
+  .lang-list, .quality-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .lang-list li, .quality-list li { font-size: 14px; color: var(--text-muted); padding-left: 1rem; position: relative; }
+  .lang-list li::before, .quality-list li::before { content: '·'; position: absolute; left: 0; color: var(--text-light); }
+
+  footer { padding: 3rem 0; text-align: center; }
+  footer p { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-light); letter-spacing: 0.06em; }
+
+  html { scroll-behavior: smooth; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  .hero h1 { animation: fadeUp 0.6s ease forwards; }
+  .hero-desc { animation: fadeUp 0.6s 0.1s ease forwards; opacity: 0; }
+  .hero-meta { animation: fadeUp 0.6s 0.2s ease forwards; opacity: 0; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .lang-fade { animation: fadeIn 0.2s ease forwards; }
+
+  @media (max-width: 580px) {
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .exp-header { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .container { padding: 0 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">IR /</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#experience" data-i18n="nav_exp">Experience</a></li>
+      <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
+      <li><a href="#certifications" data-i18n="nav_certs">Certs</a></li>
+      <li><a href="#about" data-i18n="nav_about">About</a></li>
+    </ul>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('ru')">RU</button>
+      <button class="lang-btn" onclick="setLang('uz')">UZ</button>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+
+    <div class="hero">
+      <p class="hero-label" data-i18n="hero_label">Cybersecurity &amp; IT Professional</p>
+      <h1>Ilkhombek<br><em>Rakhmatullaev</em></h1>
+      <p class="hero-desc" data-i18n="hero_desc">IT professional with a strong foundation in system administration, infrastructure support, and network security — transitioning fully into information security with a definitive goal of becoming a Cybersecurity Expert.</p>
+      <div class="hero-meta">
+        <a href="mailto:ilkhombefin@gmail.com">ilkhombefin@gmail.com</a>
+        <span class="dot"></span>
+        <a href="tel:+998903998933">+998 90 399 8933</a>
+        <span class="dot"></span>
+        <span data-i18n="hero_location">Tashkent, Uzbekistan</span>
+      </div>
+    </div>
+
+    <section id="experience">
+      <div class="section-header">
+        <span class="section-label" data-i18n="nav_exp">Experience</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role" data-i18n="job1_role">Unified Pre-sales Engineer</div>
+            <div class="exp-company">Group-IB <span class="badge" data-i18n="badge_current">Current</span></div>
+          </div>
+          <div class="exp-period">06.2025 — <span data-i18n="present">Present</span></div>
+        </div>
+        <ul class="exp-list">
+          <li data-i18n="job1_1">Deliver deep-dive technical presentations across Group-IB's full ecosystem: Threat Intelligence, Managed XDR, Fraud Protection, Digital Risk Protection, and Attack Surface Management.</li>
+          <li data-i18n="job1_2">Lead end-to-end Proof of Concept projects for software solutions and expert services including Incident Response and Security Audits.</li>
+          <li data-i18n="job1_3">Design comprehensive, multi-layered security architectures based on client IT infrastructure analysis.</li>
+          <li data-i18n="job1_4">Act as primary cybersecurity consultant during the presales cycle; prepare architecture designs, technical documentation, and RFP/RFI responses.</li>
+        </ul>
+      </div>
+      <div class="exp-item">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role" data-i18n="job2_role">System Administrator — IT Support</div>
+            <div class="exp-company">Samsung Electronics, Tashkent</div>
+          </div>
+          <div class="exp-period">03.2023 — 06.2025</div>
+        </div>
+        <ul class="exp-list">
+          <li data-i18n="job2_1">Administration of Windows Server 2019 environments including DHCP, GPO, and Active Directory.</li>
+          <li data-i18n="job2_2">Management of NextCloud file server and antivirus solutions (AhnLab V3, Symantec).</li>
+          <li data-i18n="job2_3">Regularly conducted security audits of network and systems infrastructure.</li>
+          <li data-i18n="job2_4">Configuration of SVPN, administration of Escort Nasca servers, and Zscaler proxy server management.</li>
+        </ul>
+      </div>
+      <div class="exp-item">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role" data-i18n="job3_role">System Administrator</div>
+            <div class="exp-company">British School of Tashkent</div>
+          </div>
+          <div class="exp-period">09.2021 — 02.2023</div>
+        </div>
+        <ul class="exp-list">
+          <li data-i18n="job3_1">Administration of Windows Server environments and Microsoft Azure accounts with two-factor authentication.</li>
+          <li data-i18n="job3_2">Provided user support and handled daily requests via the SDP system.</li>
+          <li data-i18n="job3_3">Maintenance and updating of management information systems.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="section-header">
+        <span class="section-label" data-i18n="gib_label">Group-IB Products</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="skills-grid gib-grid">
+        <div class="skill-cell skill-cell--gib">
+          <div class="skill-category">Threat Intelligence (TI)</div>
+          <div class="skill-items" data-i18n="gib_ti">APT &amp; adversary tracking, IOC enrichment, threat actor profiling, intelligence-driven investigations</div>
+        </div>
+        <div class="skill-cell skill-cell--gib">
+          <div class="skill-category">Attack Surface Management (ASM)</div>
+          <div class="skill-items" data-i18n="gib_asm">External asset discovery, vulnerability exposure mapping, continuous perimeter monitoring</div>
+        </div>
+        <div class="skill-cell skill-cell--gib">
+          <div class="skill-category">Digital Risk Protection (DRP)</div>
+          <div class="skill-items" data-i18n="gib_drp">Brand abuse detection, phishing takedowns, data leak monitoring, social media threat tracking</div>
+        </div>
+        <div class="skill-cell skill-cell--gib">
+          <div class="skill-category">Managed XDR (MXDR)</div>
+          <div class="skill-items" data-i18n="gib_mxdr">Endpoint + network detection, managed threat hunting, incident triage, SOC integration</div>
+        </div>
+        <div class="skill-cell skill-cell--gib">
+          <div class="skill-category">Fraud Protection</div>
+          <div class="skill-items" data-i18n="gib_fraud">Account takeover prevention, behavioral analytics, anti-fraud platform architecture</div>
+        </div>
+      </div>
+
+      <div class="section-header" style="margin-top:3rem;">
+        <span class="section-label" data-i18n="nav_skills">Technical Skills</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-cell">
+          <div class="skill-category" data-i18n="sk_presales_title">Presales Engineering</div>
+          <div class="skill-items" data-i18n="sk_presales">PoC design &amp; execution, RFP/RFI responses, solution architecture, technical demos</div>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-category" data-i18n="sk_cyber_title">Cybersecurity</div>
+          <div class="skill-items" data-i18n="sk_cyber">Threat landscape analysis, security audits, IR consulting, multi-layer security design</div>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-category" data-i18n="sk_os_title">Operating Systems</div>
+          <div class="skill-items">Windows, macOS, Linux (Ubuntu, CentOS)</div>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-category" data-i18n="sk_net_title">Networking</div>
+          <div class="skill-items">TCP/IP, DHCP, DNS, VPN</div>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-category" data-i18n="sk_srv_title">Servers</div>
+          <div class="skill-items">Windows Server (AD, GPO, DHCP), Linux (CentOS, Ubuntu)</div>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-category" data-i18n="sk_virt_title">Virtualization</div>
+          <div class="skill-items">VMware ESXi, Hyper-V</div>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-category" data-i18n="sk_cloud_title">Cloud &amp; Monitoring</div>
+          <div class="skill-items">Microsoft Azure, Zabbix</div>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-category" data-i18n="sk_auto_title">Automation</div>
+          <div class="skill-items">Ansible, Bash scripting</div>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-category" data-i18n="sk_dev_title">Containers &amp; Dev</div>
+          <div class="skill-items">Docker, Nginx, MySQL, PostgreSQL, Git</div>
+        </div>
+      </div>
+
+      <div class="section-header" style="margin-top:3rem;">
+        <span class="section-label" data-i18n="soft_label">Soft Skills</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-cell">
+          <div class="skill-category" data-i18n="soft_comm_title">Communication</div>
+          <div class="skill-items" data-i18n="soft_comm">Client-facing presentations, stakeholder alignment, cross-functional collaboration</div>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-category" data-i18n="soft_cons_title">Consulting</div>
+          <div class="skill-items" data-i18n="soft_cons">Needs discovery, complex objection handling, trusted advisor positioning</div>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-category" data-i18n="soft_prob_title">Problem Solving</div>
+          <div class="skill-items" data-i18n="soft_prob">Analytical thinking, adaptability under pressure, attention to detail</div>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-category" data-i18n="soft_pm_title">Project Management</div>
+          <div class="skill-items" data-i18n="soft_pm">Agile, Waterfall, planning and delivery of multi-stakeholder projects</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="certifications">
+      <div class="section-header">
+        <span class="section-label" data-i18n="nav_certs">Certifications</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="cert-list">
+        <div class="cert-item">
+          <div><div class="cert-name" data-i18n="cert1_name">Threat Intelligence Analyst</div><div class="cert-issuer">Group-IB</div></div>
+          <div class="cert-date">Dec 2025</div>
+        </div>
+        <div class="cert-item">
+          <div><div class="cert-name" data-i18n="cert2_name">Agile Project Management Fundamentals for IT</div><div class="cert-issuer">Udemy</div></div>
+          <div class="cert-date">Apr 2025</div>
+        </div>
+        <div class="cert-item">
+          <div><div class="cert-name">DevOps</div><div class="cert-issuer">TMS</div></div>
+          <div class="cert-date">Aug 2023 — Apr 2024</div>
+        </div>
+        <div class="cert-item">
+          <div><div class="cert-name">CCNA</div><div class="cert-issuer">Cisco</div></div>
+          <div class="cert-date">Feb 2023 — Jul 2023</div>
+        </div>
+        <div class="cert-item">
+          <div><div class="cert-name">Microsoft Windows Server 2016</div><div class="cert-issuer">Microsoft</div></div>
+          <div class="cert-date">—</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="section-header">
+        <span class="section-label" data-i18n="edu_label">Education</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role" data-i18n="edu_degree">Bachelor's Degree — Computer Information Systems in Business</div>
+            <div class="exp-company">MDIST — Management Development Institution of Singapore</div>
+          </div>
+          <div class="exp-period">09.2018 — 05.2022</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="section-header">
+        <span class="section-label" data-i18n="nav_about">About</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="about-grid">
+        <div class="about-group">
+          <h3 data-i18n="lang_label">Languages</h3>
+          <ul class="lang-list">
+            <li data-i18n="lang_uz">Uzbek</li>
+            <li data-i18n="lang_ru">Russian</li>
+            <li data-i18n="lang_en">English</li>
+          </ul>
+        </div>
+        <div class="about-group">
+          <h3 data-i18n="qualities_label">Personal Qualities</h3>
+          <ul class="quality-list">
+            <li data-i18n="q1">Communicative and confident in client-facing environments</li>
+            <li data-i18n="q2">Strong problem-solving mindset with fast adaptability to change</li>
+            <li data-i18n="q3">Detail-oriented with a consistent focus on quality outcomes</li>
+            <li data-i18n="q4">Deep empathy for user and client needs — translates technical complexity into clear value</li>
+            <li data-i18n="q5">Naturally curious — driven to understand threats, systems, and the "why" behind every solution</li>
+            <li data-i18n="q6">Self-motivated learner who actively expands skills beyond the job description</li>
+            <li data-i18n="q7">Calm under pressure — thrives in high-stakes demos, PoCs, and live client environments</li>
+            <li data-i18n="q8">Bridges the gap between technical teams and business stakeholders effortlessly</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <p>Ilkhombek Rakhmatullaev &nbsp;·&nbsp; Tashkent, Uzbekistan &nbsp;·&nbsp; ilkhombefin@gmail.com</p>
+  </div>
+</footer>
+
+<script>
+const i18n = {
+  en: {
+    nav_exp:"Experience",nav_skills:"Technical Skills",nav_certs:"Certifications",nav_about:"About",
+    hero_label:"Cybersecurity & IT Professional",
+    hero_desc:"IT professional with a strong foundation in system administration, infrastructure support, and network security — transitioning fully into information security with a definitive goal of becoming a Cybersecurity Expert.",
+    hero_location:"Tashkent, Uzbekistan",
+    badge_current:"Current",present:"Present",
+    job1_role:"Unified Pre-sales Engineer",
+    job1_1:"Deliver deep-dive technical presentations across Group-IB's full ecosystem: Threat Intelligence, Managed XDR, Fraud Protection, Digital Risk Protection, and Attack Surface Management.",
+    job1_2:"Lead end-to-end Proof of Concept projects for software solutions and expert services including Incident Response and Security Audits.",
+    job1_3:"Design comprehensive, multi-layered security architectures based on client IT infrastructure analysis.",
+    job1_4:"Act as primary cybersecurity consultant during the presales cycle; prepare architecture designs, technical documentation, and RFP/RFI responses.",
+    job2_role:"System Administrator — IT Support",
+    job2_1:"Administration of Windows Server 2019 environments including DHCP, GPO, and Active Directory.",
+    job2_2:"Management of NextCloud file server and antivirus solutions (AhnLab V3, Symantec).",
+    job2_3:"Regularly conducted security audits of network and systems infrastructure.",
+    job2_4:"Configuration of SVPN, administration of Escort Nasca servers, and Zscaler proxy server management.",
+    job3_role:"System Administrator",
+    job3_1:"Administration of Windows Server environments and Microsoft Azure accounts with two-factor authentication.",
+    job3_2:"Provided user support and handled daily requests via the SDP system.",
+    job3_3:"Maintenance and updating of management information systems.",
+    gib_label:"Group-IB Products",
+    gib_ti:"APT & adversary tracking, IOC enrichment, threat actor profiling, intelligence-driven investigations",
+    gib_asm:"External asset discovery, vulnerability exposure mapping, continuous perimeter monitoring",
+    gib_drp:"Brand abuse detection, phishing takedowns, data leak monitoring, social media threat tracking",
+    gib_mxdr:"Endpoint + network detection, managed threat hunting, incident triage, SOC integration",
+    gib_fraud:"Account takeover prevention, behavioral analytics, anti-fraud platform architecture",
+    sk_presales_title:"Presales Engineering",sk_presales:"PoC design & execution, RFP/RFI responses, solution architecture, technical demos",
+    sk_cyber_title:"Cybersecurity",sk_cyber:"Threat landscape analysis, security audits, IR consulting, multi-layer security design",
+    sk_os_title:"Operating Systems",sk_net_title:"Networking",sk_srv_title:"Servers",
+    sk_virt_title:"Virtualization",sk_cloud_title:"Cloud & Monitoring",sk_auto_title:"Automation",sk_dev_title:"Containers & Dev",
+    soft_label:"Soft Skills",
+    soft_comm_title:"Communication",soft_comm:"Client-facing presentations, stakeholder alignment, cross-functional collaboration",
+    soft_cons_title:"Consulting",soft_cons:"Needs discovery, complex objection handling, trusted advisor positioning",
+    soft_prob_title:"Problem Solving",soft_prob:"Analytical thinking, adaptability under pressure, attention to detail",
+    soft_pm_title:"Project Management",soft_pm:"Agile, Waterfall, planning and delivery of multi-stakeholder projects",
+    cert1_name:"Threat Intelligence Analyst",cert2_name:"Agile Project Management Fundamentals for IT",
+    edu_label:"Education",edu_degree:"Bachelor's Degree — Computer Information Systems in Business",
+    lang_label:"Languages",lang_uz:"Uzbek",lang_ru:"Russian",lang_en:"English",
+    qualities_label:"Personal Qualities",
+    q1:"Communicative and confident in client-facing environments",
+    q2:"Strong problem-solving mindset with fast adaptability to change",
+    q3:"Detail-oriented with a consistent focus on quality outcomes",
+    q4:"Deep empathy for user and client needs — translates technical complexity into clear value",
+    q5:"Naturally curious — driven to understand threats, systems, and the \"why\" behind every solution",
+    q6:"Self-motivated learner who actively expands skills beyond the job description",
+    q7:"Calm under pressure — thrives in high-stakes demos, PoCs, and live client environments",
+    q8:"Bridges the gap between technical teams and business stakeholders effortlessly"
+  },
+  ru: {
+    nav_exp:"Опыт работы",nav_skills:"Технические навыки",nav_certs:"Сертификаты",nav_about:"О себе",
+    hero_label:"Специалист по кибербезопасности и IT",
+    hero_desc:"IT-специалист с прочной базой в системном администрировании, поддержке инфраструктуры и сетевой безопасности — в активном переходе в сферу информационной безопасности с целью стать экспертом по кибербезопасности.",
+    hero_location:"Ташкент, Узбекистан",
+    badge_current:"Сейчас",present:"н.в.",
+    job1_role:"Unified Pre-sales Engineer",
+    job1_1:"Провожу глубокие технические презентации по всей экосистеме Group-IB: Threat Intelligence, Managed XDR, Fraud Protection, Digital Risk Protection и Attack Surface Management.",
+    job1_2:"Руковожу проектами Proof of Concept для программных решений и экспертных сервисов, включая реагирование на инциденты и аудиты безопасности.",
+    job1_3:"Проектирую многоуровневые архитектуры безопасности на основе анализа IT-инфраструктуры клиентов.",
+    job1_4:"Выступаю ключевым консультантом по кибербезопасности в цикле presales; готовлю архитектурные решения, техническую документацию и ответы на RFP/RFI.",
+    job2_role:"Системный администратор — IT поддержка",
+    job2_1:"Администрирование среды Windows Server 2019, включая DHCP, GPO и Active Directory.",
+    job2_2:"Управление файловым сервером NextCloud и антивирусными решениями (AhnLab V3, Symantec).",
+    job2_3:"Регулярное проведение аудитов безопасности сети и систем.",
+    job2_4:"Настройка SVPN, администрирование серверов Escort Nasca, управление прокси-сервером Zscaler.",
+    job3_role:"Системный администратор",
+    job3_1:"Администрирование серверов Windows Server и учётных записей Microsoft Azure с двухфакторной аутентификацией.",
+    job3_2:"Поддержка пользователей и обработка ежедневных заявок через систему SDP.",
+    job3_3:"Обслуживание и обновление информационных систем управления.",
+    gib_label:"Продукты Group-IB",
+    gib_ti:"Отслеживание APT и акторов угроз, обогащение IOC, профилирование, расследования на основе разведки",
+    gib_asm:"Обнаружение внешних активов, картирование уязвимостей, непрерывный мониторинг периметра",
+    gib_drp:"Обнаружение злоупотреблений брендом, блокировка фишинга, мониторинг утечек данных и угроз в соцсетях",
+    gib_mxdr:"Обнаружение угроз на конечных точках и в сети, управляемый поиск угроз, триаж инцидентов, интеграция с SOC",
+    gib_fraud:"Предотвращение захвата аккаунтов, поведенческая аналитика, архитектура антифрод-платформ",
+    sk_presales_title:"Presales-инжиниринг",sk_presales:"Разработка и проведение PoC, ответы на RFP/RFI, архитектура решений, технические демонстрации",
+    sk_cyber_title:"Кибербезопасность",sk_cyber:"Анализ ландшафта угроз, аудиты безопасности, IR-консультирование, проектирование многоуровневой защиты",
+    sk_os_title:"Операционные системы",sk_net_title:"Сети",sk_srv_title:"Серверы",
+    sk_virt_title:"Виртуализация",sk_cloud_title:"Облако и мониторинг",sk_auto_title:"Автоматизация",sk_dev_title:"Контейнеры и разработка",
+    soft_label:"Гибкие навыки",
+    soft_comm_title:"Коммуникация",soft_comm:"Презентации для клиентов, согласование со стейкхолдерами, кросс-функциональное взаимодействие",
+    soft_cons_title:"Консалтинг",soft_cons:"Выявление потребностей, работа с возражениями, позиционирование как доверенного советника",
+    soft_prob_title:"Решение задач",soft_prob:"Аналитическое мышление, адаптивность под давлением, внимание к деталям",
+    soft_pm_title:"Управление проектами",soft_pm:"Agile, Waterfall, планирование и реализация многосторонних проектов",
+    cert1_name:"Аналитик угроз Threat Intelligence",cert2_name:"Основы Agile-управления проектами в IT",
+    edu_label:"Образование",edu_degree:"Бакалавр — Компьютерные информационные системы в бизнесе",
+    lang_label:"Языки",lang_uz:"Узбекский",lang_ru:"Русский",lang_en:"Английский",
+    qualities_label:"Личные качества",
+    q1:"Коммуникабельный, уверенно работающий с клиентами",
+    q2:"Сильный аналитический склад ума, быстрая адаптация к изменениям",
+    q3:"Внимание к деталям и стабильный фокус на качестве результата",
+    q4:"Эмпатия к потребностям клиентов — умею переводить техническую сложность в понятную ценность",
+    q5:"Природное любопытство — стремлюсь понять угрозы, системы и причины за каждым решением",
+    q6:"Самомотивированный: постоянно расширяю навыки за рамками должностных обязанностей",
+    q7:"Спокойствие под давлением — уверенно работаю на демо, PoC и встречах с клиентами",
+    q8:"Легко нахожу общий язык между техническими командами и бизнес-заказчиками"
+  },
+  uz: {
+    nav_exp:"Tajriba",nav_skills:"Texnik ko'nikmalar",nav_certs:"Sertifikatlar",nav_about:"Men haqimda",
+    hero_label:"Kiberxavfsizlik va IT mutaxassisi",
+    hero_desc:"Tizim ma'muriyati, infratuzilmani qo'llab-quvvatlash va tarmoq xavfsizligi sohasida mustahkam tajribaga ega IT mutaxassisi — kiberxavfsizlik bo'yicha ekspert bo'lish maqsadida axborot xavfsizligi sohasiga to'liq o'tish jarayonida.",
+    hero_location:"Toshkent, O'zbekiston",
+    badge_current:"Hozir",present:"hozirgi kunga",
+    job1_role:"Unified Pre-sales Muhandisi",
+    job1_1:"Group-IB ekotizimining barcha mahsulotlari bo'yicha chuqur texnik taqdimotlar o'tkazaman: Threat Intelligence, Managed XDR, Fraud Protection, Digital Risk Protection va Attack Surface Management.",
+    job1_2:"Dasturiy yechimlar va ekspert xizmatlar (Incident Response, Security Audit) uchun boshidan oxirigacha PoC loyihalarini boshqaraman.",
+    job1_3:"Mijozlarning IT infratuzilmasini tahlil qilgan holda ko'p qatlamli xavfsizlik arxitekturasini loyihalashtiram.",
+    job1_4:"Presales tsiklida asosiy kiberxavfsizlik maslahatchisi sifatida faoliyat yuritaman; arxitektura hujjatlari, texnik dokumentatsiya va RFP/RFI javoblarini tayyorlayman.",
+    job2_role:"Tizim Administratori — IT Qo'llab-quvvatlash",
+    job2_1:"Windows Server 2019 muhitini boshqarish: DHCP, GPO va Active Directory.",
+    job2_2:"NextCloud fayl serveri va antivirus yechimlari (AhnLab V3, Symantec) ni boshqarish.",
+    job2_3:"Tarmoq va tizimlar xavfsizligi auditlarini muntazam o'tkazish.",
+    job2_4:"SVPN sozlash, Escort Nasca serverlarini boshqarish, Zscaler proksi-serverini sozlash.",
+    job3_role:"Tizim Administratori",
+    job3_1:"Windows Server muhiti va ikki faktorli autentifikatsiya bilan Microsoft Azure hisoblarini boshqarish.",
+    job3_2:"SDP tizimi orqali foydalanuvchi so'rovlarini qabul qilish va hal etish.",
+    job3_3:"Boshqaruv axborot tizimlarini saqlash va yangilash.",
+    gib_label:"Group-IB Mahsulotlari",
+    gib_ti:"APT va tahdid aktorlarini kuzatish, IOC boyitish, tahdid profilini tuzish, razvedkaga asoslangan tekshiruvlar",
+    gib_asm:"Tashqi aktivlarni aniqlash, zaifliklar xaritasini tuzish, perimetrni doimiy monitoring qilish",
+    gib_drp:"Brend suiiste'molini aniqlash, fishing bloklash, ma'lumot sizib chiqishini kuzatish, ijtimoiy tarmoqlardagi tahdidlar",
+    gib_mxdr:"Endpoint va tarmoq tahdidlarini aniqlash, boshqariladigan threat hunting, insidentlarni saralash, SOC integratsiyasi",
+    gib_fraud:"Hisob egallab olishning oldini olish, xulq-atvor analitikasi, anti-fraud platformasini loyihalash",
+    sk_presales_title:"Presales muhandisligi",sk_presales:"PoC ishlab chiqish va o'tkazish, RFP/RFI javoblari, yechim arxitekturasi, texnik demo",
+    sk_cyber_title:"Kiberxavfsizlik",sk_cyber:"Tahdidlar landshaftini tahlil qilish, xavfsizlik auditi, IR-maslahat, ko'p qatlamli himoya",
+    sk_os_title:"Operatsion tizimlar",sk_net_title:"Tarmoq",sk_srv_title:"Serverlar",
+    sk_virt_title:"Virtualizatsiya",sk_cloud_title:"Bulut va monitoring",sk_auto_title:"Avtomatlashtirish",sk_dev_title:"Konteynerlar va ishlab chiqish",
+    soft_label:"Yumshoq ko'nikmalar",
+    soft_comm_title:"Muloqot",soft_comm:"Mijozlar oldida taqdimot, manfaatdorlarni muvofiqlashtirish, jamoalararo hamkorlik",
+    soft_cons_title:"Konsalting",soft_cons:"Ehtiyojlarni aniqlash, e'tirozlar bilan ishlash, ishonchli maslahatchi sifatida pozitsiyalash",
+    soft_prob_title:"Muammolarni hal etish",soft_prob:"Analitik fikrlash, bosim ostida moslashuvchanlik, tafsilotlarga e'tibor",
+    soft_pm_title:"Loyiha boshqaruvi",soft_pm:"Agile, Waterfall, ko'p tomonlama loyihalarni rejalashtirish va amalga oshirish",
+    cert1_name:"Threat Intelligence Analitigi",cert2_name:"IT uchun Agile loyiha boshqaruvi asoslari",
+    edu_label:"Ta'lim",edu_degree:"Bakalavr — Biznesda Kompyuter Axborot Tizimlari",
+    lang_label:"Tillar",lang_uz:"O'zbek",lang_ru:"Rus",lang_en:"Ingliz",
+    qualities_label:"Shaxsiy fazilatlar",
+    q1:"Muloqotga ochiq va mijozlar bilan ishlashda ishonchli",
+    q2:"Kuchli muammolarni hal etish qobiliyati va o'zgarishlarga tez moslashish",
+    q3:"Tafsilotlarga e'tibor va sifatli natijaga doimiy intilish",
+    q4:"Mijozlar ehtiyojini chuqur tushunish — texnik murakkablikni aniq qadriyatga aylantira olish",
+    q5:"Tabiiy qiziquvchanlik — tahdidlar, tizimlar va har bir yechim ortidagi sababni tushunishga intilaman",
+    q6:"O'z-o'zini motivatsiya qila oladigan: lavozim talablaridan tashqarida ham ko'nikmalarni rivojlantiraman",
+    q7:"Bosim ostida xotirjam — demo, PoC va jonli mijoz muhitlarida ishonchli ishlash",
+    q8:"Texnik jamoalar va biznes manfaatdorlar o'rtasida ko'prik bo'la olish"
+  }
+};
+
+function setLang(lang) {
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+  });
+  const t = i18n[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+  document.documentElement.lang = lang;
+  document.querySelectorAll('main, nav ul').forEach(el => {
+    el.classList.remove('lang-fade');
+    void el.offsetWidth;
+    el.classList.add('lang-fade');
+  });
+}
+</script>
+</body>
+</html>
