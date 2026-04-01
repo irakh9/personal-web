@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ilkhombek Rakhmatullaev</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Serif:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f5f2ed;
+  --bg2:#edeae4;
+  --bg3:#e4e0d8;
+  --ink:#1a1714;
+  --ink2:#4a443c;
+  --ink3:#8c8278;
+  --red:#c0392b;
+  --border:rgba(26,23,20,0.1);
+  --border2:rgba(26,23,20,0.2);
+  --card:#ffffff;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'IBM Plex Sans',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:15px;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+
+/* INTRO */
+#intro{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--ink);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:0;
+}
+.intro-line{
+  font-family:'IBM Plex Serif',serif;
+  font-weight:800;
+  color:#f5f2ed;
+  letter-spacing:-.02em;
+  line-height:1.1;
+  overflow:hidden;
+  white-space:nowrap;
+}
+.intro-line.ln1{font-size:clamp(2.8rem,7vw,5.5rem)}
+.intro-line.ln2{font-size:clamp(2.8rem,7vw,5.5rem);color:transparent;-webkit-text-stroke:1.5px rgba(245,242,237,.35)}
+.intro-line .chars{
+  display:inline-block;
+  transform:translateY(110%);
+  animation:slideup .7s cubic-bezier(.4,0,.2,1) forwards;
+}
+.intro-line.ln2 .chars{animation-delay:.35s}
+.intro-cursor{
+  display:inline-block;width:3px;height:.85em;
+  background:var(--red);margin-left:4px;vertical-align:middle;
+  animation:blink .6s step-end infinite;
+  opacity:0;animation:cursorin .01s ease .1s forwards, blink .55s step-end .1s infinite;
+}
+@keyframes slideup{to{transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes cursorin{to{opacity:1}}
+#intro.out{animation:iout .7s cubic-bezier(.7,0,1,1) 2.8s forwards;pointer-events:none}
+@keyframes iout{to{opacity:0;transform:scale(1.05)}}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(245,242,237,0.88);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+  height:60px;padding:0 3rem;
+  display:flex;align-items:center;justify-content:space-between;
+  opacity:0;animation:fadein .5s ease 3.4s forwards;
+}
+@keyframes fadein{to{opacity:1}}
+.nav-logo{
+  font-family:'IBM Plex Serif',serif;font-weight:800;font-size:20px;
+  color:var(--ink);text-decoration:none;letter-spacing:-.02em;
+}
+.nav-logo em{color:var(--red);font-style:normal}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{
+  font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink3);text-decoration:none;
+  position:relative;transition:color .2s;
+}
+.nav-links a::after{
+  content:'';position:absolute;left:0;bottom:-3px;
+  width:0;height:1.5px;background:var(--red);transition:width .25s;
+}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after{width:100%}
+
+/* LANG SWITCHER */
+.lang-sw{display:flex;align-items:center;gap:4px;margin-left:2rem}
+.lang-btn{
+  font-family:'IBM Plex Serif',serif;font-size:11px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;
+  padding:4px 10px;border-radius:4px;border:1px solid transparent;
+  background:none;color:var(--ink3);cursor:pointer;transition:all .18s;
+}
+.lang-btn:hover{color:var(--ink)}
+.lang-btn.active{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+/* MAIN */
+main{opacity:0;animation:fadein .7s ease 3.5s forwards}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  max-width:1100px;margin:0 auto;
+  padding:0 3rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:4rem;
+  align-items:center;padding-top:60px;
+}
+.hero-eyebrow{
+  font-family:'IBM Plex Serif',serif;font-size:11px;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--red);
+  display:flex;align-items:center;gap:10px;margin-bottom:1.5rem;
+}
+.hero-eyebrow::before{content:'';display:block;width:28px;height:1.5px;background:var(--red)}
+h1.hero-name{
+  font-family:'IBM Plex Serif',serif;
+  font-size:clamp(2.6rem,4.5vw,4rem);
+  font-weight:800;line-height:1.05;letter-spacing:-.03em;
+  margin-bottom:.4rem;
+}
+h1.hero-name .outline{
+  display:block;
+  color:transparent;
+  -webkit-text-stroke:1.5px var(--ink);
+}
+.hero-role{
+  font-size:14px;font-weight:400;color:var(--ink3);
+  margin-bottom:2rem;letter-spacing:.01em;
+}
+.hero-bio{
+  font-size:15px;color:var(--ink2);line-height:1.8;
+  max-width:440px;margin-bottom:2.5rem;
+  border-left:2.5px solid var(--red);padding-left:1.25rem;
+}
+.hero-contacts{display:flex;flex-direction:column;gap:8px}
+.clink{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:13px;color:var(--ink2);text-decoration:none;
+  width:fit-content;transition:color .2s;
+}
+.clink:hover{color:var(--red)}
+.cdot{width:5px;height:5px;border-radius:50%;background:var(--ink3);flex-shrink:0;transition:background .2s}
+.clink:hover .cdot{background:var(--red)}
+
+/* PDF BUTTON */
+.pdf-btn{
+  display:inline-flex;align-items:center;gap:9px;
+  margin-top:2rem;
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:12px;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--bg);background:var(--ink);
+  border:1.5px solid var(--ink);
+  padding:11px 22px;border-radius:3px;
+  cursor:pointer;text-decoration:none;
+  transition:background .2s,color .2s,transform .15s;
+}
+.pdf-btn:hover{background:var(--red);border-color:var(--red);transform:translateY(-1px)}
+.pdf-btn svg{flex-shrink:0;transition:transform .2s}
+.pdf-btn:hover svg{transform:translateY(2px)}
+
+/* ── PRINT / PDF ─────────────────────────────── */
+@media print{
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  body{background:#fff!important;font-size:11pt;line-height:1.55;color:#111}
+  #intro,nav,.pdf-btn,.cur,.cur-ring,#navDrawer,.burger,
+  .hero-right,.hero-tags,.hero-eyebrow::before{display:none!important}
+  main{opacity:1!important;animation:none!important}
+  .hero{
+    display:block!important;min-height:auto!important;
+    padding:1.5cm 1.8cm .8cm!important;
+    border-bottom:1.5pt solid #1a1714;
+  }
+  h1.hero-name{font-size:24pt!important;margin-bottom:4pt}
+  .hero-name .outline{-webkit-text-stroke:0!important;color:#111!important}
+  .hero-eyebrow{font-size:8pt!important;margin-bottom:6pt}
+  .hero-role{font-size:9pt!important;margin-bottom:8pt;color:#555}
+  .hero-bio{font-size:9.5pt!important;border-left:2pt solid #c0392b!important;padding-left:10pt;margin-bottom:10pt;color:#333}
+  .hero-contacts{flex-direction:row!important;flex-wrap:wrap!important;gap:14px!important}
+  .clink{font-size:8.5pt!important;color:#333!important}
+  .section{padding:0 1.8cm!important;border-top:none!important;margin-top:.6cm!important;page-break-inside:avoid}
+  .s-head{margin-bottom:8pt!important;grid-template-columns:36pt 1fr!important}
+  .s-num{font-size:7pt!important;color:#c0392b!important}
+  h2.s-title{font-size:13pt!important}
+  .exp-item{grid-template-columns:120pt 1fr!important;gap:16pt!important;padding:10pt 0!important;border-bottom:0.5pt solid #ddd!important}
+  .exp-period,.exp-org{font-size:8.5pt!important}
+  .exp-role{font-size:11pt!important;margin-bottom:5pt!important}
+  .exp-pts li{font-size:9pt!important;color:#333!important;margin-bottom:2pt}
+  .badge{font-size:7pt!important;padding:1pt 5pt!important}
+  .prods{margin-top:6pt!important;padding-top:6pt!important}
+  .ppill{font-size:7.5pt!important;padding:2pt 6pt!important}
+  .skills-grid{grid-template-columns:1fr 1fr 1fr!important;gap:8pt!important}
+  .sk-card{padding:7pt 9pt!important;border:0.5pt solid #ddd!important}
+  .sk-cat{font-size:7pt!important;margin-bottom:3pt}
+  .sk-items{font-size:8.5pt!important}
+  .certs-grid{grid-template-columns:1fr 1fr!important;gap:6pt!important}
+  .cert{padding:7pt 9pt!important;border:0.5pt solid #ddd!important}
+  .cert-name{font-size:9pt!important}
+  .cert-by,.cert-yr{font-size:8pt!important}
+  .edu-blk{padding:12pt 16pt!important;background:#1a1714!important}
+  .edu-deg{font-size:10pt!important}
+  .edu-uni{font-size:8.5pt!important}
+  .edu-yr{font-size:14pt!important}
+  .about-cols{grid-template-columns:1fr 2fr!important;gap:20pt!important}
+  .ab-title{font-size:7pt!important}
+  .lang-list li,.q-list li{font-size:8.5pt!important}
+  .reveal{opacity:1!important;transform:none!important}
+  footer{display:none!important}
+  @page{margin:0;size:A4}
+}
+
+/* hero right */
+.hero-right{position:relative;display:flex;align-items:center;justify-content:center}
+.big-initials{
+  font-family:'IBM Plex Serif',serif;font-size:clamp(11rem,17vw,17rem);
+  font-weight:800;color:transparent;
+  -webkit-text-stroke:1px rgba(26,23,20,.1);
+  letter-spacing:-.04em;line-height:1;user-select:none;
+}
+.hero-tags{
+  position:absolute;bottom:8%;left:0;right:0;
+  display:flex;flex-wrap:wrap;gap:7px;justify-content:center;
+}
+.tag{
+  font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
+  padding:5px 12px;border-radius:20px;
+  border:1px solid var(--border2);color:var(--ink3);background:var(--bg);
+  transition:all .2s;cursor:default;
+}
+.tag:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+/* SECTIONS */
+.section{
+  max-width:1100px;margin:0 auto;
+  padding:5rem 3rem;border-top:1px solid var(--border);
+}
+.s-head{
+  display:grid;grid-template-columns:72px 1fr;
+  align-items:baseline;gap:1rem;margin-bottom:3rem;
+}
+.s-num{font-family:'IBM Plex Serif',serif;font-size:11px;font-weight:700;color:var(--red);letter-spacing:.1em}
+h2.s-title{
+  font-family:'IBM Plex Serif',serif;
+  font-size:clamp(1.5rem,2.4vw,2.1rem);
+  font-weight:700;letter-spacing:-.02em;color:var(--ink);
+}
+
+/* EXPERIENCE */
+.exp-item{
+  display:grid;grid-template-columns:190px 1fr;gap:3rem;
+  padding:2.5rem 0;border-bottom:1px solid var(--border);
+  position:relative;
+}
+.exp-item::before{
+  content:'';position:absolute;left:-3rem;right:-3rem;top:0;bottom:0;
+  background:transparent;transition:background .3s;z-index:-1;border-radius:6px;
+}
+.exp-item:hover::before{background:rgba(255,255,255,.75)}
+.exp-item:last-child{border-bottom:none}
+.exp-period{font-family:'IBM Plex Serif',serif;font-size:11px;font-weight:600;color:var(--ink3);letter-spacing:.05em;margin-bottom:5px}
+.exp-org{font-size:13px;color:var(--ink2);line-height:1.4;margin-bottom:7px}
+.badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--red);color:#fff;padding:3px 9px;border-radius:3px}
+.exp-role{font-family:'IBM Plex Serif',serif;font-size:1.15rem;font-weight:700;color:var(--ink);letter-spacing:-.01em;margin-bottom:1rem}
+.exp-pts{list-style:none;display:flex;flex-direction:column;gap:6px}
+.exp-pts li{font-size:14px;color:var(--ink2);padding-left:1.1rem;position:relative;line-height:1.65}
+.exp-pts li::before{content:'';position:absolute;left:0;top:11px;width:4px;height:1.5px;background:var(--red)}
+.prods{display:flex;flex-wrap:wrap;gap:7px;margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--border)}
+.ppill{font-size:12px;font-weight:500;color:var(--ink2);padding:4px 11px;border-radius:4px;background:var(--bg2);border:1px solid var(--border);cursor:default;transition:all .2s}
+.ppill:hover{background:var(--ink);color:var(--bg)}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.sk-card{
+  background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:1.2rem 1.4rem;transition:transform .2s,box-shadow .2s,border-color .2s;
+}
+.sk-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(26,23,20,.07);border-color:var(--border2)}
+.sk-cat{font-family:'IBM Plex Serif',serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:7px}
+.sk-items{font-size:13.5px;color:var(--ink2);line-height:1.65}
+
+/* CERTS */
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:10px;margin-bottom:2rem}
+.cert{
+  background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:.95rem 1.2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  transition:border-color .2s,transform .2s;
+}
+.cert:hover{border-color:var(--red);transform:translateX(4px)}
+.cert-name{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:2px}
+.cert-by{font-size:12px;color:var(--ink3)}
+.cert-yr{font-family:'IBM Plex Serif',serif;font-size:11px;font-weight:700;color:var(--red);white-space:nowrap;flex-shrink:0}
+.edu-blk{
+  background:var(--ink);border-radius:10px;padding:2rem 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;
+}
+.edu-deg{font-family:'IBM Plex Serif',serif;font-size:1rem;font-weight:700;color:var(--bg);margin-bottom:5px}
+.edu-uni{font-size:14px;color:rgba(245,242,237,.55)}
+.edu-yr{font-family:'IBM Plex Serif',serif;font-size:2.2rem;font-weight:800;color:transparent;-webkit-text-stroke:1px rgba(245,242,237,.2);white-space:nowrap}
+
+/* ABOUT */
+.about-cols{display:grid;grid-template-columns:1fr 2fr;gap:3rem}
+.ab-title{font-family:'IBM Plex Serif',serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:1.1rem}
+.lang-list,.q-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.lang-list li{font-size:14px;color:var(--ink2)}
+.lang-lv{font-size:12px;color:var(--ink3);display:block;margin-top:1px}
+.q-list li{font-size:14px;color:var(--ink2);padding-left:1.1rem;position:relative;line-height:1.55}
+.q-list li::before{content:'→';position:absolute;left:0;color:var(--ink3);font-size:11px;top:2px}
+
+footer{
+  border-top:1px solid var(--border);padding:2rem 3rem;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+}
+.flogo{font-family:'IBM Plex Serif',serif;font-size:18px;font-weight:800;color:var(--ink)}
+.flogo em{color:var(--red);font-style:normal}
+.finfo{font-size:12px;color:var(--ink3)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .65s ease,transform .65s ease}
+.reveal.vis{opacity:1;transform:none}
+
+/* CURSOR */
+.cur,.cur-ring{position:fixed;border-radius:50%;pointer-events:none;z-index:9000}
+.cur{width:7px;height:7px;background:var(--red);mix-blend-mode:multiply}
+.cur-ring{width:30px;height:30px;border:1.5px solid var(--red);opacity:.45;transition:transform .22s ease,opacity .22s ease}
+
+/* ── BURGER ───────────────────────────── */
+.burger{
+  display:none;flex-direction:column;justify-content:center;gap:5px;
+  width:36px;height:36px;background:none;border:none;cursor:pointer;padding:4px;
+  flex-shrink:0;
+}
+.burger span{
+  display:block;width:22px;height:2px;background:var(--ink);
+  border-radius:2px;transition:transform .3s,opacity .3s,width .3s;transform-origin:center;
+}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0;width:0}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* mobile drawer */
+.nav-drawer{
+  display:none;
+  position:fixed;top:60px;left:0;right:0;bottom:0;z-index:99;
+  background:rgba(245,242,237,.97);
+  backdrop-filter:blur(18px);
+  flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.nav-drawer.open{opacity:1;pointer-events:all}
+.nav-drawer a{
+  font-family:'IBM Plex Serif',serif;font-size:2rem;font-weight:700;
+  color:var(--ink);text-decoration:none;letter-spacing:-.02em;
+  transition:color .2s;
+}
+.nav-drawer a:hover{color:var(--red)}
+.drawer-lang{display:flex;gap:8px;margin-top:1rem}
+
+/* ── TABLET 1024px ───────────────────── */
+@media(max-width:1024px){
+  .hero{gap:2rem;padding:0 2rem;padding-top:60px}
+  .section{padding:4rem 2rem}
+  .big-initials{font-size:11rem}
+  footer{padding:1.5rem 2rem}
+  nav{padding:0 2rem}
+}
+
+/* ── MOBILE 768px ────────────────────── */
+@media(max-width:768px){
+  /* nav */
+  nav{padding:0 1.25rem;height:56px}
+  .nav-links,.lang-sw{display:none}
+  .burger{display:flex}
+  .nav-drawer{display:flex}
+
+  /* hero */
+  .hero{
+    grid-template-columns:1fr;
+    padding:80px 1.25rem 3rem;
+    min-height:auto;gap:0;
+  }
+  .hero-right{display:none}
+  h1.hero-name{font-size:2.4rem}
+  .hero-bio{font-size:14px}
+
+  /* sections */
+  .section{padding:2.5rem 1.25rem}
+  .s-head{grid-template-columns:48px 1fr;gap:.5rem;margin-bottom:2rem}
+
+  /* experience */
+  .exp-item{grid-template-columns:1fr;gap:.6rem;padding:2rem 0}
+  .exp-item::before{left:-1.25rem;right:-1.25rem}
+
+  /* skills */
+  .skills-grid{grid-template-columns:1fr 1fr;gap:10px}
+
+  /* certs */
+  .certs-grid{grid-template-columns:1fr}
+  .edu-blk{padding:1.5rem;gap:1rem}
+  .edu-yr{font-size:1.4rem}
+
+  /* about */
+  .about-cols{grid-template-columns:1fr;gap:2rem}
+
+  /* footer */
+  footer{padding:1.25rem;flex-direction:column;align-items:flex-start;gap:.5rem}
+  .cur,.cur-ring{display:none}
+}
+
+/* ── SMALL MOBILE 480px ──────────────── */
+@media(max-width:480px){
+  h1.hero-name{font-size:1.9rem}
+  .hero-eyebrow{font-size:10px}
+  .skills-grid{grid-template-columns:1fr}
+  .hero-contacts{gap:6px}
+  .clink{font-size:12px}
+  .s-head{grid-template-columns:1fr;gap:4px}
+  .s-num{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curR"></div>
+
+<!-- ═══════════ INTRO ═══════════ -->
+<div id="intro">
+  <div class="intro-line ln1"><span class="chars">Ilkhombek</span></div>
+  <div class="intro-line ln2"><span class="chars">Rakhmatullaev<span class="intro-cursor"></span></span></div>
+</div>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav>
+  <a class="nav-logo" href="#"><em>IR</em> /</a>
+  <div style="display:flex;align-items:center;gap:0">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#experience" data-i="nav_exp">Опыт</a></li>
+      <li><a href="#skills"     data-i="nav_skills">Навыки</a></li>
+      <li><a href="#certs"      data-i="nav_certs">Сертификаты</a></li>
+      <li><a href="#about"      data-i="nav_about">О себе</a></li>
+    </ul>
+    <div class="lang-sw">
+      <button class="lang-btn active" data-lang="ru">RU</button>
+      <button class="lang-btn" data-lang="uz">UZ</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- mobile drawer -->
+<div class="nav-drawer" id="navDrawer">
+  <a href="#experience" data-i="nav_exp" class="drawer-link">Опыт</a>
+  <a href="#skills"     data-i="nav_skills" class="drawer-link">Навыки</a>
+  <a href="#certs"      data-i="nav_certs" class="drawer-link">Сертификаты</a>
+  <a href="#about"      data-i="nav_about" class="drawer-link">О себе</a>
+  <div class="drawer-lang">
+    <button class="lang-btn active" data-lang="ru">RU</button>
+    <button class="lang-btn" data-lang="uz">UZ</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+  </div>
+</div>
+
+<main>
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow" id="hEye"></div>
+    <h1 class="hero-name"><span id="hFirst"></span><span class="outline" id="hLast"></span></h1>
+    <p class="hero-role" id="hRole"></p>
+    <p class="hero-bio" id="hBio"></p>
+    <div class="hero-contacts" id="hContacts"></div>
+    <button class="pdf-btn" id="pdfBtn" onclick="window.print()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <span id="pdfBtnLabel">Скачать резюме PDF</span>
+    </button>
+  </div>
+  <div class="hero-right">
+    <div class="big-initials" id="hInit"></div>
+    <div class="hero-tags" id="hTags"></div>
+  </div>
+</section>
+
+<section class="section reveal" id="experience">
+  <div class="s-head"><span class="s-num">01</span><h2 class="s-title" id="sec-exp">Опыт работы</h2></div>
+  <div id="expList"></div>
+</section>
+
+<section class="section reveal" id="skills">
+  <div class="s-head"><span class="s-num">02</span><h2 class="s-title" id="sec-skills">Навыки</h2></div>
+  <div class="skills-grid" id="skillsGrid"></div>
+</section>
+
+<section class="section reveal" id="certs">
+  <div class="s-head"><span class="s-num">03</span><h2 class="s-title" id="sec-certs">Сертификаты и образование</h2></div>
+  <div class="certs-grid" id="certsGrid"></div>
+  <div id="eduBlock"></div>
+</section>
+
+<section class="section reveal" id="about">
+  <div class="s-head"><span class="s-num">04</span><h2 class="s-title" id="sec-about">О себе</h2></div>
+  <div class="about-cols" id="aboutCols"></div>
+</section>
+</main>
+
+<footer>
+  <div class="flogo"><em>IR</em> /</div>
+  <div class="finfo" id="fInfo"></div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     ✏️  ВСЁ ЧТО НУЖНО РЕДАКТИРОВАТЬ — ТОЛЬКО ЭТОТ БЛОК
+     ═══════════════════════════════════════════════════════ -->
+<script>
+/* ══════════════════════════════════════════
+   ПЕРЕВОДЫ — добавляй/меняй текст здесь
+   Основной язык: ru (русский)
+   ══════════════════════════════════════════ */
+const TRANSLATIONS = {
+
+  ru: {
+    nav_exp:    "Опыт",
+    nav_skills: "Навыки",
+    nav_certs:  "Сертификаты",
+    nav_about:  "О себе",
+    sec_exp:    "Опыт работы",
+    sec_skills: "Навыки",
+    sec_certs:  "Сертификаты и образование",
+    sec_about:  "О себе",
+    badge_cur:  "Сейчас",
+    ab_lang:    "Языки",
+    ab_qual:    "Личные качества",
+    edu_label:  "Образование",
+    pdf_btn:    "Скачать резюме PDF",
+
+    hero: {
+      eyebrow:   "Кибербезопасность и пресейл-инжиниринг",
+      role:      "Unified Pre-sales Engineer @ Group-IB · Ташкент, Узбекистан",
+      bio:       "IT-специалист с 4+ лет опыта в системном администрировании и инфраструктуре — теперь полностью сосредоточен на кибербезопасности. Помогаю корпоративным клиентам проектировать и внедрять передовые решения в сфере безопасности.",
+      contacts: [
+        { label: "ilkhombefin@gmail.com", href: "mailto:ilkhombefin@gmail.com" },
+        { label: "+998 90 399 8933",      href: "tel:+998903998933" },
+        { label: "Ташкент, Узбекистан",   href: null },
+        { label: "LinkedIn",              href: "https://www.linkedin.com/in/ilkhombek-rakhmatullaev-bb7a10164/", target: "_blank" }
+      ],
+      tags: ["Threat Intelligence","Пресейл-инжиниринг","Архитектура безопасности","Реагирование на инциденты","XDR / SOC","Group-IB"]
+    },
+
+    experience: [
+      {
+        period:  "06.2025 — н.в.",
+        company: "Group-IB",
+        current: true,
+        role:    "Unified Pre-sales Engineer",
+        points: [
+          "Технические презентации по всей экосистеме Group-IB: Threat Intelligence, Managed XDR, Fraud Protection, Digital Risk Protection и Attack Surface Management.",
+          "Руководство проектами Proof of Concept (PoC) для программных решений и экспертных услуг, включая реагирование на инциденты и аудиты безопасности.",
+          "Проектирование многоуровневых архитектур безопасности на основе анализа ИТ-инфраструктуры клиентов.",
+          "Главный консультант по кибербезопасности в ходе пресейл-цикла — разработка архитектурных решений, технической документации, ответы на RFP/RFI."
+        ],
+        products: ["Threat Intelligence","Attack Surface Management","Digital Risk Protection","Managed XDR","Fraud Protection"]
+      },
+      {
+        period:  "03.2023 — 06.2025",
+        company: "Samsung Electronics, Ташкент",
+        current: false,
+        role:    "Системный администратор — IT-поддержка",
+        points: [
+          "Администрирование Windows Server 2019: DHCP, GPO, Active Directory.",
+          "Управление файловым сервером NextCloud и антивирусными решениями (AhnLab V3, Symantec).",
+          "Регулярные аудиты безопасности сетевой и системной инфраструктуры.",
+          "Настройка SVPN, серверов Escort Nasca, прокси-сервера Zscaler."
+        ],
+        products: []
+      },
+      {
+        period:  "09.2021 — 02.2023",
+        company: "British School of Tashkent",
+        current: false,
+        role:    "Системный администратор",
+        points: [
+          "Администрирование сред Windows Server и учётных записей Microsoft Azure с двухфакторной аутентификацией.",
+          "Поддержка пользователей и обработка ежедневных заявок через систему SDP.",
+          "Обслуживание и обновление информационных систем управления."
+        ],
+        products: []
+      }
+    ],
+
+    skills: [
+      { category: "Пресейл",             items: "Разработка и проведение PoC, ответы на RFP/RFI, архитектура решений, технические демонстрации" },
+      { category: "Кибербезопасность",   items: "Анализ угроз, аудиты безопасности, консультации по IR, проектирование многоуровневой защиты" },
+      { category: "Операционные системы",items: "Windows, macOS, Linux (Ubuntu, CentOS)" },
+      { category: "Сети",                items: "TCP/IP, DHCP, DNS, VPN, Zscaler proxy" },
+      { category: "Серверы и виртуализация", items: "Windows Server (AD, GPO, DHCP), VMware ESXi, Hyper-V" },
+      { category: "Облако и мониторинг", items: "Microsoft Azure, Zabbix" },
+      { category: "Автоматизация и Dev", items: "Ansible, Bash, Docker, Nginx, MySQL, PostgreSQL, Git" },
+      { category: "Soft Skills",         items: "Презентации для клиентов, работа со стейкхолдерами, консалтинг, Agile/Waterfall" }
+    ],
+
+    certs: [
+      { name: "Аналитик Threat Intelligence",              issuer: "Group-IB",  year: "Дек 2025" },
+      { name: "Основы Agile-управления проектами",         issuer: "Udemy",     year: "Апр 2025" },
+      { name: "DevOps",                                    issuer: "TMS",       year: "2023–2024" },
+      { name: "CCNA — Cisco Certified Network Associate",  issuer: "Cisco",     year: "2023" },
+      { name: "Microsoft Windows Server 2016",             issuer: "Microsoft", year: "—" }
+    ],
+
+    education: {
+      degree:     "Бакалавр — Компьютерные информационные системы в бизнесе",
+      university: "MDIST — Management Development Institution of Singapore",
+      years:      "2018 – 2022"
+    },
+
+    about: {
+      languages: [
+        { lang: "Узбекский", level: "Родной" },
+        { lang: "Русский",   level: "Свободно" },
+        { lang: "Английский",level: "Профессиональный" }
+      ],
+      qualities: [
+        "Уверен в общении с клиентами и во время технических демонстраций",
+        "Переводит сложные технические концепции в понятную бизнес-ценность",
+        "Внимателен к деталям, стабильно ориентирован на качество результата",
+        "Сохраняю спокойствие под давлением — отлично работаю на PoC и живых демо",
+        "Самостоятельно обучаюсь и постоянно расширяю компетенции",
+        "Нахожу общий язык между техническими командами и бизнес-стейкхолдерами"
+      ]
+    }
+  },
+
+  /* ── УЗБЕКСКИЙ ─────────────────────────────── */
+  uz: {
+    nav_exp:    "Tajriba",
+    nav_skills: "Ko'nikmalar",
+    nav_certs:  "Sertifikatlar",
+    nav_about:  "Men haqimda",
+    sec_exp:    "Ish tajribasi",
+    sec_skills: "Ko'nikmalar",
+    sec_certs:  "Sertifikatlar va ta'lim",
+    sec_about:  "Men haqimda",
+    badge_cur:  "Hozir",
+    ab_lang:    "Tillar",
+    ab_qual:    "Shaxsiy fazilatlar",
+    pdf_btn:    "Rezyumeni PDF yuklab olish",
+
+    hero: {
+      eyebrow:   "Kiberxavfsizlik va preseyls muhandisligi",
+      role:      "Unified Pre-sales Engineer @ Group-IB · Toshkent, O'zbekiston",
+      bio:       "4+ yillik IT tajribaga ega mutaxassis — tizim ma'muriyati va infratuzilmadan to'liq kiberxavfsizlikka yo'nalganman. Korporativ mijozlarga ilg'or xavfsizlik yechimlarini loyihalash va joriy etishda yordam beraman.",
+      contacts: [
+        { label: "ilkhombefin@gmail.com", href: "mailto:ilkhombefin@gmail.com" },
+        { label: "+998 90 399 8933",      href: "tel:+998903998933" },
+        { label: "Toshkent, O'zbekiston", href: null },
+        { label: "LinkedIn",              href: "https://www.linkedin.com/in/ilkhombek-rakhmatullaev-bb7a10164/", target: "_blank" }
+      ],
+      tags: ["Threat Intelligence","Preseyls muhandisligi","Xavfsizlik arxitekturasi","Hodisalarga javob","XDR / SOC","Group-IB"]
+    },
+
+    experience: [
+      {
+        period:  "06.2025 — hozir",
+        company: "Group-IB",
+        current: true,
+        role:    "Unified Pre-sales Engineer",
+        points: [
+          "Group-IB ekotizimining barcha mahsulotlari bo'yicha texnik taqdimotlar: Threat Intelligence, Managed XDR, Fraud Protection, DRP va ASM.",
+          "Dasturiy ta'minot va ekspert xizmatlari uchun PoC loyihalarini boshidan oxirigacha boshqarish.",
+          "Mijozlarning IT infratuzilmasini tahlil qilish asosida ko'p qatlamli xavfsizlik arxitekturalarini loyihalash.",
+          "Preseyls sikli davomida asosiy kiberxavfsizlik maslahatchisi — arxitektura dizayni, texnik hujjatlar, RFP/RFI javoblari."
+        ],
+        products: ["Threat Intelligence","Attack Surface Management","Digital Risk Protection","Managed XDR","Fraud Protection"]
+      },
+      {
+        period:  "03.2023 — 06.2025",
+        company: "Samsung Electronics, Toshkent",
+        current: false,
+        role:    "Tizim ma'muri — IT qo'llab-quvvatlash",
+        points: [
+          "Windows Server 2019 muhitini boshqarish: DHCP, GPO, Active Directory.",
+          "NextCloud fayl serveri va antivirus yechimlari (AhnLab V3, Symantec) bilan ishlash.",
+          "Tarmoq va tizim infratuzilmasining muntazam xavfsizlik auditlari.",
+          "SVPN sozlash, Escort Nasca serverlari va Zscaler proksi-serverini boshqarish."
+        ],
+        products: []
+      },
+      {
+        period:  "09.2021 — 02.2023",
+        company: "British School of Tashkent",
+        current: false,
+        role:    "Tizim ma'muri",
+        points: [
+          "Windows Server muhitlari va ikki faktorli autentifikatsiya bilan Microsoft Azure hisoblarini boshqarish.",
+          "SDP tizimi orqali foydalanuvchilarga yordam va so'rovlarni ko'rib chiqish.",
+          "Boshqaruv axborot tizimlarini texnik xizmat ko'rsatish va yangilash."
+        ],
+        products: []
+      }
+    ],
+
+    skills: [
+      { category: "Preseyls",              items: "PoC ishlab chiqish va o'tkazish, RFP/RFI javoblari, yechim arxitekturasi, texnik demolar" },
+      { category: "Kiberxavfsizlik",       items: "Tahdid tahlili, xavfsizlik auditi, IR maslahati, ko'p qatlamli xavfsizlik dizayni" },
+      { category: "Operatsion tizimlar",   items: "Windows, macOS, Linux (Ubuntu, CentOS)" },
+      { category: "Tarmoq",                items: "TCP/IP, DHCP, DNS, VPN, Zscaler proxy" },
+      { category: "Serverlar va virtualizatsiya", items: "Windows Server (AD, GPO, DHCP), VMware ESXi, Hyper-V" },
+      { category: "Bulut va monitoring",   items: "Microsoft Azure, Zabbix" },
+      { category: "Avtomatlashtirish",     items: "Ansible, Bash, Docker, Nginx, MySQL, PostgreSQL, Git" },
+      { category: "Soft ko'nikmalar",      items: "Mijoz taqdimotlari, manfaatdor tomonlar bilan ishlash, maslahat, Agile/Waterfall" }
+    ],
+
+    certs: [
+      { name: "Threat Intelligence tahlilchisi",           issuer: "Group-IB",  year: "Dek 2025" },
+      { name: "Agile loyiha boshqaruvi asoslari",          issuer: "Udemy",     year: "Apr 2025" },
+      { name: "DevOps",                                    issuer: "TMS",       year: "2023–2024" },
+      { name: "CCNA — Cisco Certified Network Associate",  issuer: "Cisco",     year: "2023" },
+      { name: "Microsoft Windows Server 2016",             issuer: "Microsoft", year: "—" }
+    ],
+
+    education: {
+      degree:     "Bakalavr — Biznesda kompyuter axborot tizimlari",
+      university: "MDIST — Management Development Institution of Singapore",
+      years:      "2018 – 2022"
+    },
+
+    about: {
+      languages: [
+        { lang: "O'zbek",   level: "Ona tili" },
+        { lang: "Rus",      level: "Ravon" },
+        { lang: "Ingliz",   level: "Professional" }
+      ],
+      qualities: [
+        "Mijozlar bilan muloqotda va texnik demonstratsiyalarda ishonchli",
+        "Murakkab texnik tushunchalarni aniq biznes qiymatiga aylantiradi",
+        "Tafsilotlarga e'tibor beradi, sifatga doimiy e'tibor qaratadi",
+        "Bosim ostida sakin — PoC va jonli demolarda yaxshi ishlaydi",
+        "O'z-o'zini o'qituvchi, ko'nikmalarni doimiy kengaytiradi",
+        "Texnik guruhlar va biznes manfaatdor tomonlar o'rtasida ko'prik bo'ladi"
+      ]
+    }
+  },
+
+  /* ── АНГЛИЙСКИЙ ────────────────────────────── */
+  en: {
+    nav_exp:    "Experience",
+    nav_skills: "Skills",
+    nav_certs:  "Certs",
+    nav_about:  "About",
+    sec_exp:    "Experience",
+    sec_skills: "Skills",
+    sec_certs:  "Certifications & Education",
+    sec_about:  "About",
+    badge_cur:  "Current",
+    ab_lang:    "Languages",
+    ab_qual:    "Personal Qualities",
+    pdf_btn:    "Download Resume PDF",
+
+    hero: {
+      eyebrow:   "Cybersecurity & Presales Engineering",
+      role:      "Unified Pre-sales Engineer @ Group-IB · Tashkent, Uzbekistan",
+      bio:       "IT professional with 4+ years in system administration and infrastructure — now fully focused on cybersecurity. I help enterprise clients design and adopt advanced security solutions.",
+      contacts: [
+        { label: "ilkhombefin@gmail.com", href: "mailto:ilkhombefin@gmail.com" },
+        { label: "+998 90 399 8933",      href: "tel:+998903998933" },
+        { label: "Tashkent, Uzbekistan",  href: null },
+        { label: "LinkedIn",              href: "https://www.linkedin.com/in/ilkhombek-rakhmatullaev-bb7a10164/", target: "_blank" }
+      ],
+      tags: ["Threat Intelligence","Presales Engineering","Security Architecture","Incident Response","XDR / SOC","Group-IB"]
+    },
+
+    experience: [
+      {
+        period:  "06.2025 — Present",
+        company: "Group-IB",
+        current: true,
+        role:    "Unified Pre-sales Engineer",
+        points: [
+          "Technical presentations across Group-IB's full ecosystem: Threat Intelligence, Managed XDR, Fraud Protection, Digital Risk Protection, and Attack Surface Management.",
+          "Led end-to-end Proof of Concept (PoC) projects for software and expert services including Incident Response and Security Audits.",
+          "Designed multi-layered security architectures based on client IT infrastructure analysis.",
+          "Primary cybersecurity consultant during the presales cycle — architecture designs, technical docs, and RFP/RFI responses."
+        ],
+        products: ["Threat Intelligence","Attack Surface Management","Digital Risk Protection","Managed XDR","Fraud Protection"]
+      },
+      {
+        period:  "03.2023 — 06.2025",
+        company: "Samsung Electronics, Tashkent",
+        current: false,
+        role:    "System Administrator — IT Support",
+        points: [
+          "Administered Windows Server 2019: DHCP, GPO, Active Directory.",
+          "Managed NextCloud file server and antivirus solutions (AhnLab V3, Symantec).",
+          "Conducted regular security audits of network and systems infrastructure.",
+          "Configured SVPN, Escort Nasca servers, Zscaler proxy."
+        ],
+        products: []
+      },
+      {
+        period:  "09.2021 — 02.2023",
+        company: "British School of Tashkent",
+        current: false,
+        role:    "System Administrator",
+        points: [
+          "Administered Windows Server environments and Microsoft Azure accounts with 2FA.",
+          "User support and daily request handling via SDP ticketing system.",
+          "Maintenance and updates of management information systems."
+        ],
+        products: []
+      }
+    ],
+
+    skills: [
+      { category: "Presales",           items: "PoC design & execution, RFP/RFI responses, solution architecture, technical demos" },
+      { category: "Cybersecurity",      items: "Threat landscape analysis, security audits, IR consulting, multi-layer security design" },
+      { category: "Operating Systems",  items: "Windows, macOS, Linux (Ubuntu, CentOS)" },
+      { category: "Networking",         items: "TCP/IP, DHCP, DNS, VPN, Zscaler proxy" },
+      { category: "Servers & Virt.",    items: "Windows Server (AD, GPO, DHCP), VMware ESXi, Hyper-V" },
+      { category: "Cloud & Monitoring", items: "Microsoft Azure, Zabbix" },
+      { category: "Automation & Dev",   items: "Ansible, Bash, Docker, Nginx, MySQL, PostgreSQL, Git" },
+      { category: "Soft Skills",        items: "Client presentations, stakeholder alignment, consulting, Agile/Waterfall PM" }
+    ],
+
+    certs: [
+      { name: "Threat Intelligence Analyst",              issuer: "Group-IB",  year: "Dec 2025" },
+      { name: "Agile Project Management Fundamentals",    issuer: "Udemy",     year: "Apr 2025" },
+      { name: "DevOps",                                   issuer: "TMS",       year: "2023–2024" },
+      { name: "CCNA — Cisco Certified Network Associate", issuer: "Cisco",     year: "2023" },
+      { name: "Microsoft Windows Server 2016",            issuer: "Microsoft", year: "—" }
+    ],
+
+    education: {
+      degree:     "Bachelor's Degree — Computer Information Systems in Business",
+      university: "MDIST — Management Development Institution of Singapore",
+      years:      "2018 – 2022"
+    },
+
+    about: {
+      languages: [
+        { lang: "Uzbek",   level: "Native" },
+        { lang: "Russian", level: "Fluent" },
+        { lang: "English", level: "Professional" }
+      ],
+      qualities: [
+        "Confident in client-facing environments and technical demos",
+        "Translates complex technical concepts into clear business value",
+        "Detail-oriented with a consistent focus on quality outcomes",
+        "Calm under pressure — thrives in high-stakes PoCs and live demos",
+        "Self-motivated learner, continuously expanding skills",
+        "Bridges the gap between technical teams and business stakeholders"
+      ]
+    }
+  }
+};
+/* ═══════════════════════════════════════════
+   КОНЕЦ РЕДАКТИРУЕМОГО БЛОКА
+   ═══════════════════════════════════════════ */
+
+/* ─── RENDER ФУНКЦИЯ ─────────────────────── */
+const HERO_FIRST = "Ilkhombek";
+const HERO_LAST  = "Rakhmatullaev";
+const HERO_INIT  = "IR";
+
+function render(lang) {
+  const T = TRANSLATIONS[lang];
+  const $ = id => document.getElementById(id);
+
+  // Nav links
+  document.querySelectorAll('[data-i]').forEach(el => {
+    const key = el.getAttribute('data-i');
+    if (T[key]) el.textContent = T[key];
+  });
+
+  // Section titles
+  $('sec-exp').textContent    = T.sec_exp;
+  $('sec-skills').textContent = T.sec_skills;
+  $('sec-certs').textContent  = T.sec_certs;
+  $('sec-about').textContent  = T.sec_about;
+
+  // Hero
+  $('hEye').textContent   = T.hero.eyebrow;
+  $('hFirst').textContent = HERO_FIRST + ' ';
+  $('hLast').textContent  = HERO_LAST;
+  $('hRole').textContent  = T.hero.role;
+  $('hBio').textContent   = T.hero.bio;
+  $('hInit').textContent  = HERO_INIT;
+
+  const hc = $('hContacts'); hc.innerHTML = '';
+  T.hero.contacts.forEach(c => {
+    const el = c.href ? document.createElement('a') : document.createElement('span');
+    el.className = 'clink';
+    if (c.href) { el.href = c.href; if (c.target) el.target = c.target; }
+    const isLI = c.label === 'LinkedIn';
+    el.innerHTML = isLI
+      ? `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;color:var(--ink3)"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>${c.label}`
+      : `<span class="cdot"></span>${c.label}`;
+    hc.appendChild(el);
+  });
+  const ht = $('hTags'); ht.innerHTML = '';
+  T.hero.tags.forEach(t => {
+    const s = document.createElement('span'); s.className = 'tag'; s.textContent = t; ht.appendChild(s);
+  });
+
+  // Experience
+  const el = $('expList'); el.innerHTML = '';
+  T.experience.forEach(e => {
+    const prods = e.products.length
+      ? `<div class="prods">${e.products.map(p=>`<span class="ppill">${p}</span>`).join('')}</div>` : '';
+    el.insertAdjacentHTML('beforeend', `
+    <div class="exp-item">
+      <div>
+        <div class="exp-period">${e.period}</div>
+        <div class="exp-org">${e.company}</div>
+        ${e.current ? `<span class="badge">${T.badge_cur}</span>` : ''}
+      </div>
+      <div>
+        <div class="exp-role">${e.role}</div>
+        <ul class="exp-pts">${e.points.map(p=>`<li>${p}</li>`).join('')}</ul>
+        ${prods}
+      </div>
+    </div>`);
+  });
+
+  // Skills
+  const sg = $('skillsGrid'); sg.innerHTML = '';
+  T.skills.forEach(s => {
+    sg.insertAdjacentHTML('beforeend',
+      `<div class="sk-card"><div class="sk-cat">${s.category}</div><div class="sk-items">${s.items}</div></div>`);
+  });
+
+  // Certs
+  const cg = $('certsGrid'); cg.innerHTML = '';
+  T.certs.forEach(c => {
+    cg.insertAdjacentHTML('beforeend',
+      `<div class="cert"><div><div class="cert-name">${c.name}</div><div class="cert-by">${c.issuer}</div></div><div class="cert-yr">${c.year}</div></div>`);
+  });
+  const ed = T.education;
+  $('eduBlock').innerHTML = `<div class="edu-blk"><div><div class="edu-deg">${ed.degree}</div><div class="edu-uni">${ed.university}</div></div><div class="edu-yr">${ed.years}</div></div>`;
+
+  // About
+  const langs = `<div><div class="ab-title">${T.ab_lang}</div><ul class="lang-list">${T.about.languages.map(l=>`<li>${l.lang}<span class="lang-lv">${l.level}</span></li>`).join('')}</ul></div>`;
+  const quals = `<div><div class="ab-title">${T.ab_qual}</div><ul class="q-list">${T.about.qualities.map(q=>`<li>${q}</li>`).join('')}</ul></div>`;
+  $('aboutCols').innerHTML = langs + quals;
+
+  // Footer
+  $('fInfo').textContent = `${HERO_FIRST} ${HERO_LAST} · ${T.hero.contacts[0].label}`;
+
+  // PDF button label
+  const pdfLabel = $('pdfBtnLabel');
+  if (pdfLabel) pdfLabel.textContent = T.pdf_btn || 'Download PDF';
+
+  // Active button
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+}
+
+// Default: Russian
+render('ru');
+
+// Lang switcher — both nav and drawer
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    render(btn.dataset.lang);
+    // close drawer if open
+    document.getElementById('navDrawer').classList.remove('open');
+    document.getElementById('burger').classList.remove('open');
+  });
+});
+
+// Burger menu
+const burger = document.getElementById('burger');
+const drawer = document.getElementById('navDrawer');
+burger.addEventListener('click', () => {
+  burger.classList.toggle('open');
+  drawer.classList.toggle('open');
+});
+// Close drawer on nav link click
+drawer.querySelectorAll('.drawer-link').forEach(a => {
+  a.addEventListener('click', () => {
+    burger.classList.remove('open');
+    drawer.classList.remove('open');
+  });
+});
+
+
+/* ─── INTRO DISMISS ─────────────────────── */
+const introEl = document.getElementById('intro');
+introEl.classList.add('out');
+introEl.addEventListener('animationend', e => {
+  if (e.animationName === 'iout') introEl.remove();
+}, {once: true});
+
+
+/* ─── CUSTOM CURSOR ─────────────────────── */
+const cur  = document.getElementById('cur');
+const curR = document.getElementById('curR');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => {
+  mx=e.clientX; my=e.clientY;
+  cur.style.left=(mx-3.5)+'px'; cur.style.top=(my-3.5)+'px';
+});
+(function animCur(){
+  rx+=(mx-rx)*.13; ry+=(my-ry)*.13;
+  curR.style.left=(rx-15)+'px'; curR.style.top=(ry-15)+'px';
+  requestAnimationFrame(animCur);
+})();
+document.addEventListener('mouseover', e => {
+  if (e.target.closest('a,button,.tag,.ppill,.sk-card,.cert,.lang-btn')) {
+    curR.style.transform='scale(2.2)'; curR.style.opacity='.2';
+  } else {
+    curR.style.transform='scale(1)'; curR.style.opacity='.45';
+  }
+});
+
+
+/* ─── SCROLL REVEAL ─────────────────────── */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); }});
+}, {threshold: .1});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+
+/* ─── PARALLAX INITIALS ─────────────────── */
+const bigInit = document.getElementById('hInit');
+window.addEventListener('scroll', () => {
+  if (bigInit) bigInit.style.transform = `translateY(${window.scrollY*.16}px)`;
+});
+</script>
+</body>
+</html>
